@@ -2623,7 +2623,7 @@ BackgroundTransparency=1,
 au,at,
 })
 
-local aw=af("Enter Key","key",nil,"Input",function(aw)
+local aw=af("Enter Key","text-cursor-input",nil,"Input",function(aw)
 an=aw
 end)
 
