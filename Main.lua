@@ -3178,10 +3178,11 @@ end
 
 local function onChange(am)
 
-local an=am.AbsoluteSize
-local ao=am.AbsolutePosition
+local an=16
+local ao=am.AbsoluteSize-Vector2.new(an,an)
+local ap=am.AbsolutePosition+Vector2.new(an/2,an/2)
 
-updatePositions(an,ao)
+updatePositions(ao,ap)
 end
 
 
