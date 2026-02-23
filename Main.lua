@@ -2744,12 +2744,14 @@ ae("Get key","key",function()
 local aB=pcall(function()
 setclipboard(ag.KeySystem.URL)
 end)
+task.spawn(function()
 ag.WindUI:Notify{
 Title="Key System",
 Content=aB and"Key link copied to clipboard."or"Could not copy link.",
 Icon=aB and"clipboard-check"or"clipboard",
 Duration=4,
 }
+end)
 end,"Secondary",ay.Frame)
 end
 
@@ -2946,11 +2948,13 @@ ab.AddSignal(x.MouseButton1Click,function()
 local z=pcall(function()
 u.Copy()
 end)
+task.spawn(function()
 ag.WindUI:Notify{
 Title="Key System",
 Content=z and"Key link copied to clipboard."or"Could not copy link. Open it manually.",
 Icon=z and"clipboard-check"or"clipboard",
 }
+end)
 end)
 end
 end
