@@ -3185,7 +3185,7 @@ updatePositions(an,ao)
 end
 
 
-local am="AcrylicBlur_"..tostring(al:GetDebugId())
+local am="AcrylicBlur_"..tostring(math.random(100000,999999)).."_"..tostring(tick())
 ab:BindToRenderStep(am,Enum.RenderPriority.Camera.Value+1,function()
 if aj then
 render()
