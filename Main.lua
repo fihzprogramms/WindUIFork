@@ -2741,7 +2741,15 @@ end
 
 if ag.KeySystem.URL then
 ae("Get key","key",function()
+local aB=pcall(function()
 setclipboard(ag.KeySystem.URL)
+end)
+ag.WindUI:Notify{
+Title="Key System",
+Content=aB and"Key link copied to clipboard."or"Could not copy link.",
+Icon=aB and"clipboard-check"or"clipboard",
+Duration=4,
+}
 end,"Secondary",ay.Frame)
 end
 
