@@ -9854,7 +9854,8 @@ Elements={},
 ContainerFrame=nil,
 UICorner=Window.UICorner-(Window.UIPadding/2),
 
-Gap=Window.NewElements and 4 or 6,
+Gap=Window.NewElements and 1 or 6,
+SectionGap=Window.NewElements and 6 or 6,
 
 TabPaddingX=4+(Window.UIPadding/2),
 TabPaddingY=3+(Window.UIPadding/2),
@@ -10056,7 +10057,7 @@ PaddingBottom=UDim.new(0,not Window.HidePanelBackground and 20 or 10),
 }),
 ah("UIListLayout",{
 SortOrder="LayoutOrder",
-Padding=UDim.new(0,ao.Gap),
+Padding=UDim.new(0,ao.SectionGap),
 HorizontalAlignment="Center",
 })
 })
