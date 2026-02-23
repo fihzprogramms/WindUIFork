@@ -1915,17 +1915,34 @@ Key=tostring(ao)
 })
 
 if not ap then
-return false,"Failed to connect to server"
+return false,"Failed to connect to server",false
 end
 
 local aq=ap.Authenticated_Status=="Success"
 local ar=ap.Note or(aq and"Key validated!"or"Invalid key")
 
+
+local as=false
+if not aq then
+local at=string.lower(ar)
+if string.find(at,"expir")or string.find(at,"expired")
+or ap.Authenticated_Status=="Expired"then
+as=true
+end
+end
+
 if aq then
 SaveKey(ao)
-return true,ar
+return true,ar,false
 else
-return false,ar
+
+if as then
+DeleteKey()
+pcall(function()
+ac.LocalPlayer:Kick"[Panda] Your key has expired. Please get a new key."
+end)
+end
+return false,ar,as
 end
 end
 
@@ -1945,13 +1962,15 @@ end
 if ah then
 local ao=LoadKey()
 if ao then
-local ap,aq=ValidateKey(ao)
-if not ap then
+local ap,aq,ar=ValidateKey(ao)
+if not ap and not ar then
+
 DeleteKey()
 pcall(function()
 ac.LocalPlayer:Kick("[Panda] "..(aq or"Invalid key. Please get a new key."))
 end)
 end
+
 else
 pcall(function()
 ac.LocalPlayer:Kick"[Panda] No key found. Please get a key first."
