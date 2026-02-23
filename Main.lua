@@ -11907,21 +11907,12 @@ PaddingBottom=UDim.new(0,au.UIPadding),
 })
 })
 
-al.AddSignal(au.UIElements.Main.Main.Topbar.Left:GetPropertyChangedSignal"AbsoluteSize",function()
-local u=0
+local function updateCenterPosition()
+local u=au.UIElements.Main.Main.Topbar.Left.AbsoluteSize.X/at.WindUI.UIScale
 local v=au.UIElements.Main.Main.Topbar.Right.UIListLayout.AbsoluteContentSize.X/at.WindUI.UIScale
-
-
-
-
-
-u=au.UIElements.Main.Main.Topbar.Left.AbsoluteSize.X/at.WindUI.UIScale
 if au.Topbar.ButtonsType~="Default"then
 u=u+v+au.UIPadding-4
 end
-
-
-
 au.UIElements.Main.Main.Topbar.Center.Position=UDim2.new(
 0,
 u+(au.UIPadding/at.WindUI.UIScale),
@@ -11934,6 +11925,10 @@ au.UIElements.Main.Main.Topbar.Center.Size=UDim2.new(
 1,
 0
 )
+end
+
+al.AddSignal(au.UIElements.Main.Main.Topbar.Left:GetPropertyChangedSignal"AbsoluteSize",function()
+updateCenterPosition()
 end)
 
 if au.Topbar.ButtonsType~="Default"then
@@ -12844,8 +12839,12 @@ end
 end,(au.Topbar.ButtonsType=="Default"and 999 or 997),nil,Color3.fromHex"#F4695F")
 
 function au.Tag(G,H)
-if au.UIElements.Main.Main.Topbar.Center.Visible==false then au.UIElements.Main.Main.Topbar.Center.Visible=true end
-return ar:New(H,au.UIElements.Main.Main.Topbar.Center)
+if au.UIElements.Main.Main.Topbar.Center.Visible==false then
+au.UIElements.Main.Main.Topbar.Center.Visible=true
+end
+local J=ar:New(H,au.UIElements.Main.Main.Topbar.Center)
+task.defer(updateCenterPosition)
+return J
 end
 
 
