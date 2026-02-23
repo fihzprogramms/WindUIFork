@@ -12137,7 +12137,17 @@ end
 end)
 
 function au.SetToggleKey(v,x)
+if typeof(x)=="EnumItem"then
 au.ToggleKey=x
+au._toggleKeyName=x.Name
+elseif type(x)=="string"then
+au._toggleKeyName=x
+local z,A=pcall(function()return Enum.KeyCode[x]end)
+au.ToggleKey=z and A or nil
+else
+au.ToggleKey=nil
+au._toggleKeyName=nil
+end
 end
 
 function au.SetTitle(v,x)
@@ -12530,7 +12540,7 @@ end)
 end
 
 al.AddSignal(ae.InputBegan,function(z,A)
-if au.ToggleKey and z.KeyCode==au.ToggleKey then
+if au._toggleKeyName and z.KeyCode and z.KeyCode.Name==au._toggleKeyName then
 au:Toggle()
 return
 end
