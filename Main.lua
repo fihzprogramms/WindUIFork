@@ -2540,37 +2540,7 @@ al.UIElements.Main.AutomaticSize="Y"
 al.UIElements.Main.Size=UDim2.new(0,ap,0,0)
 
 
-local aq=ac("Frame",{
-Size=UDim2.new(0,0,0,0),
-BackgroundTransparency=1,
-Position=UDim2.new(0.5,0,1,0),
-AnchorPoint=Vector2.new(0.5,0),
-Parent=al.UIElements.MainContainer,
-ClipsDescendants=false,
-ZIndex=99999,
-})
-
-local ar=ab.NewRoundFrame(99,"Squircle",{
-ImageTransparency=.8,
-ImageColor3=Color3.new(1,1,1),
-Size=UDim2.new(0,120,0,4),
-Position=UDim2.new(0.5,0,0,12),
-AnchorPoint=Vector2.new(0.5,0),
-Parent=aq,
-},{
-ac("TextButton",{
-Size=UDim2.new(1,16,1,16),
-BackgroundTransparency=1,
-Position=UDim2.new(0.5,0,0.5,0),
-AnchorPoint=Vector2.new(0.5,0.5),
-Active=true,
-ZIndex=99999,
-Name="Frame",
-})
-})
-
-
-local as=ac("TextButton",{
+local aq=ac("TextButton",{
 Size=UDim2.new(1,0,0,30),
 BackgroundTransparency=1,
 Active=true,
@@ -2584,28 +2554,14 @@ Name="TopDragArea",
 
 ab.Drag(
 al.UIElements.MainContainer,
-{as,ar.Frame},
-function(at)
-if at then
-ad(ar,.1,{ImageTransparency=.35}):Play()
-else
-ad(ar,.2,{ImageTransparency=.8}):Play()
-end
-end
+{aq}
 )
 
-
-local at=al.Close
-function al.Close(au)
-aq:Destroy()
-return at(au)
-end
-
-local au
+local ar
 
 if ag.Icon then
 
-au=ab.Image(
+ar=ab.Image(
 ag.Icon,
 ag.Title..":"..ag.Icon,
 0,
@@ -2613,11 +2569,11 @@ ag.Title..":"..ag.Icon,
 "KeySystem",
 ag.IconThemed
 )
-au.Size=UDim2.new(0,24,0,24)
-au.LayoutOrder=-1
+ar.Size=UDim2.new(0,24,0,24)
+ar.LayoutOrder=-1
 end
 
-local av=ac("TextLabel",{
+local as=ac("TextLabel",{
 AutomaticSize="XY",
 BackgroundTransparency=1,
 Text=ag.KeySystem.Title or ag.Title,
@@ -2628,7 +2584,7 @@ TextColor3="Text",
 TextSize=20
 })
 
-local aw=ac("TextLabel",{
+local at=ac("TextLabel",{
 AutomaticSize="XY",
 BackgroundTransparency=1,
 Text="Key System",
@@ -2642,7 +2598,7 @@ TextColor3="Text",
 TextSize=16
 })
 
-local ax=ac("Frame",{
+local au=ac("Frame",{
 BackgroundTransparency=1,
 AutomaticSize="XY",
 },{
@@ -2651,10 +2607,10 @@ Padding=UDim.new(0,14),
 FillDirection="Horizontal",
 VerticalAlignment="Center"
 }),
-au,av
+ar,as
 })
 
-local ay=ac("Frame",{
+local av=ac("Frame",{
 AutomaticSize="Y",
 Size=UDim2.new(1,0,0,0),
 BackgroundTransparency=1,
@@ -2664,16 +2620,16 @@ BackgroundTransparency=1,
 
 
 
-ax,aw,
+au,at,
 })
 
-local az=af("Enter Key","key",nil,"Input",function(az)
-an=az
+local aw=af("Enter Key","key",nil,"Input",function(aw)
+an=aw
 end)
 
-local aA
+local ax
 if ag.KeySystem.Note and ag.KeySystem.Note~=""then
-aA=ac("TextLabel",{
+ax=ac("TextLabel",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
@@ -2690,7 +2646,7 @@ TextWrapped=true,
 })
 end
 
-local aB=ac("Frame",{
+local ay=ac("Frame",{
 Size=UDim2.new(1,0,0,42),
 BackgroundTransparency=1,
 },{
@@ -2707,11 +2663,11 @@ FillDirection="Horizontal",
 })
 
 
-local b
+local az
 if ag.KeySystem.Thumbnail and ag.KeySystem.Thumbnail.Image then
-local d
+local aA
 if ag.KeySystem.Thumbnail.Title then
-d=ac("TextLabel",{
+aA=ac("TextLabel",{
 Text=ag.KeySystem.Thumbnail.Title,
 ThemeTag={
 TextColor3="Text",
@@ -2724,7 +2680,7 @@ AnchorPoint=Vector2.new(0.5,0.5),
 Position=UDim2.new(0.5,0,0.5,0),
 })
 end
-b=ac("ImageLabel",{
+az=ac("ImageLabel",{
 Image=ag.KeySystem.Thumbnail.Image,
 BackgroundTransparency=1,
 Size=UDim2.new(0,ao,1,-12),
@@ -2732,7 +2688,7 @@ Position=UDim2.new(0,6,0,6),
 Parent=al.UIElements.Main,
 ScaleType="Crop"
 },{
-d,
+aA,
 ac("UICorner",{
 CornerRadius=UDim.new(0,20),
 })
@@ -2741,8 +2697,8 @@ end
 
 ac("Frame",{
 
-Size=UDim2.new(1,b and-ao or 0,1,0),
-Position=UDim2.new(0,b and ao or 0,0,0),
+Size=UDim2.new(1,az and-ao or 0,1,0),
+Position=UDim2.new(0,az and ao or 0,0,0),
 BackgroundTransparency=1,
 Parent=al.UIElements.Main
 },{
@@ -2755,10 +2711,10 @@ ac("UIListLayout",{
 Padding=UDim.new(0,18),
 FillDirection="Vertical",
 }),
+av,
+ax,
+aw,
 ay,
-aA,
-az,
-aB,
 ac("UIPadding",{
 PaddingTop=UDim.new(0,16),
 PaddingLeft=UDim.new(0,16),
@@ -2772,21 +2728,21 @@ PaddingBottom=UDim.new(0,16),
 
 
 
-local d=ae("Exit","log-out",function()
+local aA=ae("Exit","log-out",function()
 al:Close()()
-end,"Tertiary",aB.Frame)
+end,"Tertiary",ay.Frame)
 
-if b then
-d.Parent=b
-d.Size=UDim2.new(0,0,0,42)
-d.Position=UDim2.new(0,10,1,-10)
-d.AnchorPoint=Vector2.new(0,1)
+if az then
+aA.Parent=az
+aA.Size=UDim2.new(0,0,0,42)
+aA.Position=UDim2.new(0,10,1,-10)
+aA.AnchorPoint=Vector2.new(0,1)
 end
 
 if ag.KeySystem.URL then
 ae("Get key","key",function()
 setclipboard(ag.KeySystem.URL)
-end,"Secondary",aB.Frame)
+end,"Secondary",ay.Frame)
 end
 
 if ag.KeySystem.API then
@@ -2798,11 +2754,11 @@ if ag.KeySystem.API then
 
 
 
-local f=240
-local g=false
-local h=ae("Get key","key",nil,"Secondary",aB.Frame)
+local aB=240
+local b=false
+local d=ae("Get key","key",nil,"Secondary",ay.Frame)
 
-local j=ab.NewRoundFrame(99,"Squircle",{
+local f=ab.NewRoundFrame(99,"Squircle",{
 Size=UDim2.new(0,1,1,0),
 ThemeTag={
 ImageColor3="Text",
@@ -2814,16 +2770,16 @@ ac("Frame",{
 BackgroundTransparency=1,
 Size=UDim2.new(0,0,1,0),
 AutomaticSize="X",
-Parent=h.Frame,
+Parent=d.Frame,
 },{
-j,
+f,
 ac("UIPadding",{
 PaddingLeft=UDim.new(0,5),
 PaddingRight=UDim.new(0,5),
 })
 })
 
-local l=ab.Image(
+local g=ab.Image(
 "chevron-down",
 "chevron-down",
 0,
@@ -2832,17 +2788,17 @@ local l=ab.Image(
 true
 )
 
-l.Size=UDim2.new(1,0,1,0)
+g.Size=UDim2.new(1,0,1,0)
 
 ac("Frame",{
 Size=UDim2.new(0,21,0,21),
-Parent=h.Frame,
+Parent=d.Frame,
 BackgroundTransparency=1,
 },{
-l
+g
 })
 
-local m=ab.NewRoundFrame(15,"Squircle",{
+local h=ab.NewRoundFrame(15,"Squircle",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 ThemeTag={
@@ -2861,15 +2817,15 @@ Padding=UDim.new(0,5),
 })
 })
 
-local p=ac("Frame",{
+local j=ac("Frame",{
 BackgroundTransparency=1,
-Size=UDim2.new(0,f,0,0),
+Size=UDim2.new(0,aB,0,0),
 ClipsDescendants=true,
 AnchorPoint=Vector2.new(1,0),
-Parent=h,
+Parent=d,
 Position=UDim2.new(1,0,1,15)
 },{
-m
+h
 })
 
 ac("TextLabel",{
@@ -2883,7 +2839,7 @@ Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 TextWrapped=true,
 TextXAlignment="Left",
-Parent=m,
+Parent=h,
 },{
 ac("UIPadding",{
 PaddingTop=UDim.new(0,10),
@@ -2893,33 +2849,33 @@ PaddingBottom=UDim.new(0,10),
 })
 })
 
-for r,u in next,ag.KeySystem.API do
-local v=ag.WindUI.Services[u.Type]
-if v then
-local x={}
-for z,A in next,v.Args do
-table.insert(x,u[A])
+for l,m in next,ag.KeySystem.API do
+local p=ag.WindUI.Services[m.Type]
+if p then
+local r={}
+for u,v in next,p.Args do
+table.insert(r,m[v])
 end
 
-local z=v.New(table.unpack(x))
-z.Type=u.Type
-table.insert(am,z)
+local u=p.New(table.unpack(r))
+u.Type=m.Type
+table.insert(am,u)
 
-local A=ab.Image(
-u.Icon or v.Icon or Icons[u.Type]or"user",
-u.Icon or v.Icon or Icons[u.Type]or"user",
+local v=ab.Image(
+m.Icon or p.Icon or Icons[m.Type]or"user",
+m.Icon or p.Icon or Icons[m.Type]or"user",
 0,
 "Temp",
 "KeySystem",
 true
 )
-A.Size=UDim2.new(0,24,0,24)
+v.Size=UDim2.new(0,24,0,24)
 
-local B=ab.NewRoundFrame(10,"Squircle",{
+local x=ab.NewRoundFrame(10,"Squircle",{
 Size=UDim2.new(1,0,0,0),
 ThemeTag={ImageColor3="Text"},
 ImageTransparency=1,
-Parent=m,
+Parent=h,
 AutomaticSize="Y",
 },{
 ac("UIListLayout",{
@@ -2927,7 +2883,7 @@ FillDirection="Horizontal",
 Padding=UDim.new(0,10),
 VerticalAlignment="Center",
 }),
-A,
+v,
 ac("UIPadding",{
 PaddingTop=UDim.new(0,10),
 PaddingLeft=UDim.new(0,10),
@@ -2945,7 +2901,7 @@ Padding=UDim.new(0,5),
 HorizontalAlignment="Center",
 }),
 ac("TextLabel",{
-Text=u.Title or v.Name,
+Text=m.Title or p.Name,
 BackgroundTransparency=1,
 FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
 ThemeTag={TextColor3="Text"},
@@ -2957,7 +2913,7 @@ TextWrapped=true,
 TextXAlignment="Left",
 }),
 ac("TextLabel",{
-Text=u.Desc or"",
+Text=m.Desc or"",
 BackgroundTransparency=1,
 FontFace=Font.new(ab.Font,Enum.FontWeight.Regular),
 ThemeTag={TextColor3="Text"},
@@ -2966,20 +2922,20 @@ TextSize=16,
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 TextWrapped=true,
-Visible=u.Desc and true or false,
+Visible=m.Desc and true or false,
 TextXAlignment="Left",
 })
 })
 },true)
 
-ab.AddSignal(B.MouseEnter,function()
-ad(B,0.08,{ImageTransparency=.95}):Play()
+ab.AddSignal(x.MouseEnter,function()
+ad(x,0.08,{ImageTransparency=.95}):Play()
 end)
-ab.AddSignal(B.InputEnded,function()
-ad(B,0.08,{ImageTransparency=1}):Play()
+ab.AddSignal(x.InputEnded,function()
+ad(x,0.08,{ImageTransparency=1}):Play()
 end)
-ab.AddSignal(B.MouseButton1Click,function()
-z.Copy()
+ab.AddSignal(x.MouseButton1Click,function()
+u.Copy()
 ag.WindUI:Notify{
 Title="Key System",
 Content="Key link copied to clipboard.",
@@ -2989,36 +2945,36 @@ end)
 end
 end
 
-ab.AddSignal(h.MouseButton1Click,function()
-if not g then
-ad(p,.3,{Size=UDim2.new(0,f,0,m.AbsoluteSize.Y+1)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ad(l,.3,{Rotation=180},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+ab.AddSignal(d.MouseButton1Click,function()
+if not b then
+ad(j,.3,{Size=UDim2.new(0,aB,0,h.AbsoluteSize.Y+1)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+ad(g,.3,{Rotation=180},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 else
-ad(p,.25,{Size=UDim2.new(0,f,0,0)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-ad(l,.25,{Rotation=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+ad(j,.25,{Size=UDim2.new(0,aB,0,0)},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+ad(g,.25,{Rotation=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 end
-g=not g
+b=not b
 end)
 
 end
 
-local function handleSuccess(f)
+local function handleSuccess(aB)
 al:Close()()
-writefile((ag.Folder or"Temp").."/"..ah..".key",tostring(f))
+writefile((ag.Folder or"Temp").."/"..ah..".key",tostring(aB))
 task.wait(.4)
 ai(true)
 end
 
-local f=ae("Submit","arrow-right",function()
-local f=tostring(an or"empty")local g=
+local aB=ae("Submit","arrow-right",function()
+local aB=tostring(an or"empty")local b=
 ag.Folder or ag.Title
 
 if ag.KeySystem.KeyValidator then
-local h=ag.KeySystem.KeyValidator(f)
+local d=ag.KeySystem.KeyValidator(aB)
 
-if h then
+if d then
 if ag.KeySystem.SaveKey then
-handleSuccess(f)
+handleSuccess(aB)
 else
 al:Close()()
 task.wait(.4)
@@ -3032,13 +2988,13 @@ Icon="triangle-alert",
 }
 end
 elseif not ag.KeySystem.API then
-local h=type(ag.KeySystem.Key)=="table"
-and table.find(ag.KeySystem.Key,f)
-or ag.KeySystem.Key==f
+local d=type(ag.KeySystem.Key)=="table"
+and table.find(ag.KeySystem.Key,aB)
+or ag.KeySystem.Key==aB
 
-if h then
+if d then
 if ag.KeySystem.SaveKey then
-handleSuccess(f)
+handleSuccess(aB)
 else
 al:Close()()
 task.wait(.4)
@@ -3046,48 +3002,48 @@ ai(true)
 end
 end
 else
-local h,j
-for l,m in next,am do
-local p,r=m.Verify(f)
-if p then
-h,j=true,r
+local d,f
+for g,h in next,am do
+local j,l=h.Verify(aB)
+if j then
+d,f=true,l
 break
 end
-j=r
+f=l
 end
 
-if h then
-handleSuccess(f)
+if d then
+handleSuccess(aB)
 else
 ag.WindUI:Notify{
 Title="Key System. Error",
-Content=j,
+Content=f,
 Icon="triangle-alert",
 }
 end
 end
-end,"Primary",aB)
+end,"Primary",ay)
 
 
-local g=f:FindFirstChild"Squircle"
-if g then
+local b=aB:FindFirstChild"Squircle"
+if b then
 
-if ab.Objects[g]then
-ab.Objects[g].Properties.ImageColor3=nil
+if ab.Objects[b]then
+ab.Objects[b].Properties.ImageColor3=nil
 end
-g.ImageColor3=Color3.new(1,1,1)
+b.ImageColor3=Color3.new(1,1,1)
 ac("UIGradient",{
 Color=ColorSequence.new(
 Color3.fromHex"#008CFF",
 Color3.fromHex"#4167FF"
 ),
 Rotation=0,
-Parent=g,
+Parent=b,
 })
 end
 
-f.AnchorPoint=Vector2.new(1,0.5)
-f.Position=UDim2.new(1,0,0.5,0)
+aB.AnchorPoint=Vector2.new(1,0.5)
+aB.Position=UDim2.new(1,0,0.5,0)
 
 
 
