@@ -3389,8 +3389,8 @@ AcrylicPaint=a.r(),
 function ab.init()
 local ac=Instance.new"DepthOfFieldEffect"
 ac.FarIntensity=0
-ac.InFocusRadius=0.1
-ac.NearIntensity=1
+ac.InFocusRadius=0.25
+ac.NearIntensity=0.5
 
 local ad={}
 
