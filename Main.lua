@@ -1793,102 +1793,183 @@ return X end function a.f():typeof(__modImpl())local aa=a.cache.f if not aa then
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
 local ab=aa(game:GetService"HttpService")
-local ac={}
+local ac=aa(game:GetService"Players")
+local ad={}
 
-local ad="https://new.pandadevelopment.net/api/v1"
+local ae="https://new.pandadevelopment.net/api/v1"
 
 local function getHardwareId()
-local ae,af=pcall(function()
+local af,ag=pcall(function()
 return gethwid()
 end)
-if ae and af and af~=""then
-return tostring(af)
+if af and ag and ag~=""then
+return tostring(ag)
 end
 
 
-local ag,ah=pcall(function()
-local ag=aa(game:GetService"RbxAnalyticsService")
-return tostring(ag:GetClientId())
+local ah,ai=pcall(function()
+local ah=aa(game:GetService"RbxAnalyticsService")
+return tostring(ah:GetClientId())
 end)
-if ag and ah then
-return ah:gsub("-","")
+if ah and ai then
+return ai:gsub("-","")
 end
 
 
-return tostring(aa(game:GetService"Players").LocalPlayer.UserId)
+return tostring(ac.LocalPlayer.UserId)
 end
 
-function ac.New(ae)
-local af=request or http_request or syn_request
-local ag=setclipboard or toclipboard
-local ah=getHardwareId()
 
-local function makeRequest(ai,aj)
-local ak=ad..ai
-local al=ab:JSONEncode(aj)
+local function ensureFolder(af)
+if isfolder and makefolder then
+if not isfolder(af)then
+pcall(makefolder,af)
+end
+end
+end
 
-local am,an=pcall(function()
-return af{
-Url=ak,
+function ad.New(af,ag)
+ag=ag or{}
+
+local ah=ag.CheckForPanda or false
+local ai=(ag.SaveKey~=false)
+local aj=ag.Folder or"PandaDev"
+
+local ak=request or http_request or syn_request
+local al=setclipboard or toclipboard
+local am=getHardwareId()
+
+
+local an=aj.."/"..tostring(af)..".key"
+
+
+
+
+local function SaveKey(ao)
+if not ai then return end
+pcall(function()
+ensureFolder(aj)
+writefile(an,tostring(ao))
+end)
+end
+
+local function LoadKey()
+local ao,ap=pcall(function()
+if isfile and isfile(an)then
+return readfile(an)
+end
+return nil
+end)
+if ao and ap and ap~=""then
+return ap
+end
+return nil
+end
+
+local function DeleteKey()
+pcall(function()
+if isfile and isfile(an)then
+delfile(an)
+end
+end)
+end
+
+
+
+
+local function makeRequest(ao,ap)
+local aq=ae..ao
+local ar=ab:JSONEncode(ap)
+
+local as,at=pcall(function()
+return ak{
+Url=aq,
 Method="POST",
 Headers={
 ["Content-Type"]="application/json"
 },
-Body=al
+Body=ar
 }
 end)
 
-if am and an and an.Body then
-local ao,ap=pcall(function()
-return ab:JSONDecode(an.Body)
+if as and at and at.Body then
+local au,av=pcall(function()
+return ab:JSONDecode(at.Body)
 end)
-if ao then
-return ap
+if au then
+return av
 end
 end
 
 return nil
 end
 
-local function ValidateKey(ai)
-local aj=makeRequest("/keys/validate",{
-ServiceID=tostring(ae),
-HWID=tostring(ah),
-Key=tostring(ai)
+
+
+
+local function ValidateKey(ao)
+local ap=makeRequest("/keys/validate",{
+ServiceID=tostring(af),
+HWID=tostring(am),
+Key=tostring(ao)
 })
 
-if not aj then
+if not ap then
 return false,"Failed to connect to server"
 end
 
-local ak=aj.Authenticated_Status=="Success"
-local al=aj.Note or(ak and"Key validated!"or"Invalid key")
+local aq=ap.Authenticated_Status=="Success"
+local ar=ap.Note or(aq and"Key validated!"or"Invalid key")
 
-if ak then
-return true,al
+if aq then
+SaveKey(ao)
+return true,ar
 else
-return false,al
+return false,ar
 end
 end
 
 local function GetKeyLink()
-return"https://new.pandadevelopment.net/getkey/"..tostring(ae).."?hwid="..tostring(ah)
+return"https://new.pandadevelopment.net/getkey/"..tostring(af).."?hwid="..tostring(am)
 end
 
 local function CopyLink()
-if ag then
-ag(GetKeyLink())
+if al then
+al(GetKeyLink())
+end
+end
+
+
+
+
+if ah then
+local ao=LoadKey()
+if ao then
+local ap,aq=ValidateKey(ao)
+if not ap then
+DeleteKey()
+pcall(function()
+ac.LocalPlayer:Kick("[Panda] "..(aq or"Invalid key. Please get a new key."))
+end)
+end
+else
+pcall(function()
+ac.LocalPlayer:Kick"[Panda] No key found. Please get a key first."
+end)
 end
 end
 
 return{
 Verify=ValidateKey,
 Copy=CopyLink,
-GetKeyURL=GetKeyLink
+GetKeyURL=GetKeyLink,
+SaveKey=SaveKey,
+LoadKey=LoadKey,
+DeleteKey=DeleteKey,
 }
 end
 
-return ac end function a.g():typeof(__modImpl())local aa=a.cache.g if not aa then aa={c=__modImpl()}a.cache.g=aa end return aa.c end end do local function __modImpl()
+return ad end function a.g():typeof(__modImpl())local aa=a.cache.g if not aa then aa={c=__modImpl()}a.cache.g=aa end return aa.c end end do local function __modImpl()
 
 
 
