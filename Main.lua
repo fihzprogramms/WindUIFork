@@ -11908,20 +11908,23 @@ PaddingBottom=UDim.new(0,au.UIPadding),
 })
 
 local function updateCenterPosition()
-local u=au.UIElements.Main.Main.Topbar.Left.AbsoluteSize.X/at.WindUI.UIScale
-local v=au.UIElements.Main.Main.Topbar.Right.UIListLayout.AbsoluteContentSize.X/at.WindUI.UIScale
-if au.Topbar.ButtonsType~="Default"then
-u=u+v+au.UIPadding-4
-end
+local u=au.UIElements.Main.Main.Topbar
+local v=u.Left
+local x=u.Right.UIListLayout.AbsoluteContentSize.X/at.WindUI.UIScale
+
+
+local z=(v.AbsolutePosition.X+v.AbsoluteSize.X-u.AbsolutePosition.X)/at.WindUI.UIScale
+local A=au.UIPadding/at.WindUI.UIScale
+
 au.UIElements.Main.Main.Topbar.Center.Position=UDim2.new(
 0,
-u+(au.UIPadding/at.WindUI.UIScale),
+z+A,
 0.5,
 0
 )
 au.UIElements.Main.Main.Topbar.Center.Size=UDim2.new(
 1,
--u-v-((au.UIPadding*2)/at.WindUI.UIScale),
+-z-A-x-(au.UIPadding/at.WindUI.UIScale),
 1,
 0
 )
