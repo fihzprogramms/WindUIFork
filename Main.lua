@@ -2939,7 +2939,7 @@ u.Copy()
 ag.WindUI:Notify{
 Title="Key System",
 Content="Key link copied to clipboard.",
-Image="key",
+Icon="clipboard-check",
 }
 end)
 end
