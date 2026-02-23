@@ -2554,7 +2554,7 @@ local ar=ab.NewRoundFrame(99,"Squircle",{
 ImageTransparency=.8,
 ImageColor3=Color3.new(1,1,1),
 Size=UDim2.new(0,120,0,4),
-Position=UDim2.new(0.5,0,0,15),
+Position=UDim2.new(0.5,0,0,14.5),
 AnchorPoint=Vector2.new(0.5,0),
 Parent=aq,
 },{
