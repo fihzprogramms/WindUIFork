@@ -11914,7 +11914,7 @@ local x=u.Right.UIListLayout.AbsoluteContentSize.X/at.WindUI.UIScale
 
 
 local z=(v.AbsolutePosition.X+v.AbsoluteSize.X-u.AbsolutePosition.X)/at.WindUI.UIScale
-local A=au.UIPadding/at.WindUI.UIScale
+local A=6
 
 au.UIElements.Main.Main.Topbar.Center.Position=UDim2.new(
 0,
