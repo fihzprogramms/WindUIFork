@@ -12530,13 +12530,12 @@ end)
 end
 
 al.AddSignal(ae.InputBegan,function(z,A)
-if A then return end
-
-if au.ToggleKey then
-if z.KeyCode==au.ToggleKey then
+if au.ToggleKey and z.KeyCode==au.ToggleKey then
 au:Toggle()
+return
 end
-end
+
+if A then return end
 end)
 
 task.spawn(function()
