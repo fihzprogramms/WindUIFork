@@ -2935,11 +2935,13 @@ ab.AddSignal(x.InputEnded,function()
 ad(x,0.08,{ImageTransparency=1}):Play()
 end)
 ab.AddSignal(x.MouseButton1Click,function()
+local z=pcall(function()
 u.Copy()
+end)
 ag.WindUI:Notify{
 Title="Key System",
-Content="Key link copied to clipboard.",
-Icon="clipboard-check",
+Content=z and"Key link copied to clipboard."or"Could not copy link. Open it manually.",
+Icon=z and"clipboard-check"or"clipboard",
 }
 end)
 end
